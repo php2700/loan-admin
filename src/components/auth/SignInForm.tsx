@@ -24,7 +24,7 @@ export default function SignInForm() {
 
                   const loginData = { email, password };
                   const response = await axios.post(
-                        `${import.meta.env.VITE_APP_URL}admin/login`,
+                        `${import.meta.env.VITE_APP_URL}api/admin/login`,
                         loginData
                   );
 

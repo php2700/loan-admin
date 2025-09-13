@@ -14,7 +14,7 @@ export default function LoanTable() {
       const token = localStorage.getItem("fatafatLoanToken");
 
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_URL}admin/loanList`,
+        `${import.meta.env.VITE_APP_URL}api/admin/loanList`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

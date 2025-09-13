@@ -20,7 +20,7 @@ export default function UserTable() {
                   const token = localStorage.getItem("fatafatLoanToken");
 
                   const response = await axios.get(
-                        `${import.meta.env.VITE_APP_URL}admin/userList`,
+                        `${import.meta.env.VITE_APP_URL}api/admin/userList`,
                         {
                               headers: {
                                     Authorization: `Bearer ${token}`,
