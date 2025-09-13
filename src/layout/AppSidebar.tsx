@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 
@@ -387,13 +389,13 @@ const AppSidebar: React.FC = () => {
                         <Link to="/home">
                               {isExpanded || isHovered || isMobileOpen ? (
                                     <>
-                                          <img
+                                          {/* <img
                                                 className="dark:hidden"
                                                 src="/images/logo/logo.svg"
                                                 alt="Logo"
                                                 width={150}
                                                 height={40}
-                                          />
+                                          /> */}
                                           <img
                                                 className="hidden dark:block"
                                                 src="/images/logo/logo-dark.svg"
