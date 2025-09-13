@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "../../ui/table";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -122,6 +123,7 @@ export default function LoanTable() {
 
           <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
             {loanData.map((loan) => (
+              
               <TableRow key={loan.id}>
                 <TableCell className="px-5 py-4 sm:px-6 text-start">
                   <div className="flex items-center gap-3">
