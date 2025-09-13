@@ -106,12 +106,7 @@ export default function LoanTable() {
               >
                 Occupation
               </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Email
-              </TableCell>
+             
                <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -161,9 +156,7 @@ export default function LoanTable() {
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {loan.occupation}
                 </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {loan.email}
-                </TableCell>
+         
                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
   {new Date(loan.createdAt).toLocaleDateString()}
 </TableCell>
