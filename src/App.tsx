@@ -21,6 +21,7 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import LoanTables from "./pages/LoanTable";
 import UserTables from "./pages/Tables/userTable";
+import ReferTables from "./pages/Tables/ReferTable";
 
 export default function App() {
   return (
@@ -32,13 +33,11 @@ export default function App() {
           <Route index path="/"   element={<SignIn />} />
 
 
-
-
-
           <Route element={<AppLayout />}>
             <Route  path="/home" element={<Home />} />
             <Route path="/users" element={<UserTables />} />
             <Route path="/loan-application" element={<LoanTables />} />
+            <Route path="/refers-list" element={<ReferTables />} />
 
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />

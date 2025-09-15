@@ -70,6 +70,11 @@ const navItems: NavItem[] = [
             name: "Loan applications",
             path: "/loan-application",
       },
+       {
+            icon: <TableIcon />,
+            name: "Reffers List",
+            path: "/refers-list",
+      },
       // {
       //   name: "Pages",
       //   icon: <PageIcon />,
