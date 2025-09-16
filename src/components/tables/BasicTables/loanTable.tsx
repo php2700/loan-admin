@@ -1,5 +1,11 @@
 // @ts-nocheck
-import { Table, TableBody, TableCell, TableHeader, TableRow } from "../../ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "../../ui/table";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -42,7 +48,7 @@ export default function LoanTable() {
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-h-[400px] overflow-y-auto overflow-x-auto"> {/* Adjusted height and scroll */}
+      <div className="max-h-[500px] overflow-y-auto overflow-x-auto">
         <Table>
           <TableHeader className="border-b border-gray-100 dark:border-white/[0.05] sticky top-0 bg-white dark:bg-white/[0.03]">
             <TableRow>
@@ -106,19 +112,24 @@ export default function LoanTable() {
               >
                 Occupation
               </TableCell>
-             
-               <TableCell
+
+              <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                created 
+                payment Img
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                created
               </TableCell>
             </TableRow>
           </TableHeader>
 
           <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
             {loanData.map((loan) => (
-              
               <TableRow key={loan.id}>
                 <TableCell className="px-5 py-4 sm:px-6 text-start">
                   <div className="flex items-center gap-3">
@@ -156,10 +167,21 @@ export default function LoanTable() {
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {loan.occupation}
                 </TableCell>
-         
-                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-  {new Date(loan.createdAt).toLocaleDateString()}
-</TableCell>
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  <img
+                    src={
+                      loan.paymentImg
+                        ? `${import.meta.env.VITE_APP_URL}${loan.paymentImg}`
+                        : "/default.png"
+                    }
+                    alt="Payment"
+                    className="h-16 w-16 border rounded-lg object-cover"
+                  />
+                </TableCell>
+
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {new Date(loan.createdAt).toLocaleDateString()}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
