@@ -22,6 +22,7 @@ import Home from "./pages/Dashboard/Home";
 import LoanTables from "./pages/LoanTable";
 import UserTables from "./pages/Tables/userTable";
 import ReferTables from "./pages/Tables/ReferTable";
+import ReferAmount from "./pages/Tables/RefferAmount";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="/users" element={<UserTables />} />
             <Route path="/loan-application" element={<LoanTables />} />
             <Route path="/refers-list" element={<ReferTables />} />
+            <Route path="/refer-charge" element={<ReferAmount/>} />
 
             {/* Others Page */}
             <Route path="/profile" element={<UserProfiles />} />

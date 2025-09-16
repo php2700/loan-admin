@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function LoanTable() {
+  const token = localStorage.getItem("fatafatLoanToken");
+
   const [loanData, setLoansData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -17,8 +19,6 @@ export default function LoanTable() {
   const getLoanList = async () => {
     try {
       setLoading(true);
-
-      const token = localStorage.getItem("fatafatLoanToken");
 
       const response = await axios.get(
         `${import.meta.env.VITE_APP_URL}api/admin/loanList`,
@@ -47,8 +47,8 @@ export default function LoanTable() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-h-[500px] overflow-y-auto overflow-x-auto">
+    <div className="rounded-xl  bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+      <div className="overflow-y-auto overflow-x-auto">
         <Table>
           <TableHeader className="border-b border-gray-100 dark:border-white/[0.05] sticky top-0 bg-white dark:bg-white/[0.03]">
             <TableRow>
@@ -117,7 +117,13 @@ export default function LoanTable() {
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                payment Img
+                Payment Img
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                Accpet Loan
               </TableCell>
               <TableCell
                 isHeader
@@ -177,6 +183,48 @@ export default function LoanTable() {
                     alt="Payment"
                     className="h-16 w-16 border rounded-lg object-cover"
                   />
+                </TableCell>
+
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400 cursor-pointer">
+                  <select
+                    value={loan.isAcceptLoan}
+                    onChange={async (e) => {
+                      const newStatus = e.target.value;
+
+                      try {
+                        await axios.patch(
+                          `${
+                            import.meta.env.VITE_APP_URL
+                          }api/admin/update-loan`,
+                          {
+                            _id: loan?._id,
+                            isAcceptLoan: newStatus,
+                          },
+                          {
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                            },
+                          }
+                        );
+
+                        getLoanList();
+                      } catch (error) {
+                        console.error("Error updating loan status:", error);
+                      }
+                    }}
+                    className={`border rounded px-2 py-1 text-sm focus:outline-none
+      ${
+        loan.isAcceptLoan === "accepted"
+          ? "bg-green-100 text-green-500"
+          : loan.isAcceptLoan === "rejected"
+          ? "bg-red-100 text-red-500"
+          : "bg-yellow-100 text-yellow-500"
+      }`}
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
                 </TableCell>
 
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
