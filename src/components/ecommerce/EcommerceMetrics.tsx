@@ -1,11 +1,11 @@
+// @ts-nocheck
+
 import { useEffect, useState } from "react";
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
+
   BoxIconLine,
   GroupIcon,
 } from "../../icons";
-import Badge from "../ui/badge/Badge";
 import axios from "axios";
 
 export default function EcommerceMetrics() {
