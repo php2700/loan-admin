@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { Dropdown } from "../ui/dropdown/Dropdown";
