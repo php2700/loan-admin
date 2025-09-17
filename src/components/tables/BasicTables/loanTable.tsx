@@ -15,13 +15,18 @@ export default function LoanTable() {
   const [loanData, setLoansData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit] = useState(10);
 
   const getLoanList = async () => {
     try {
       setLoading(true);
 
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_URL}api/admin/loanList`,
+        `${
+          import.meta.env.VITE_APP_URL
+        }api/admin/loanList?page=${page}&limit=${limit}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -29,8 +34,9 @@ export default function LoanTable() {
         }
       );
 
-      setLoansData(response.data);
-
+      // setLoansData(response.data);
+      setLoansData(response.data.data);
+      setTotalPages(response.data.pagination.totalPages);
       console.log(response?.data, "ddddddddddddd");
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
@@ -41,7 +47,7 @@ export default function LoanTable() {
 
   useEffect(() => {
     getLoanList();
-  }, []);
+  }, [page]);
 
   if (loading) return <p>Loading loans...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
@@ -234,6 +240,27 @@ export default function LoanTable() {
             ))}
           </TableBody>
         </Table>
+        <div className="flex justify-end items-center mt-4">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+
+          <span>
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage((prev) => prev + 1)}
+            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

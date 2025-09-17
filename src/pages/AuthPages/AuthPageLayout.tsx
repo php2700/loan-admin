@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import GridShape from "../../components/common/GridShape";
 import { Link } from "react-router";
@@ -31,9 +32,9 @@ export default function AuthLayout({
                                     </div>
                               </div>
                         </div>
-                        <div className="fixed z-50 hidden bottom-6 right-6 sm:block">
+                        {/* <div className="fixed z-50 hidden bottom-6 right-6 sm:block">
                               <ThemeTogglerTwo />
-                        </div>
+                        </div> */}
                   </div>
             </div>
       );
