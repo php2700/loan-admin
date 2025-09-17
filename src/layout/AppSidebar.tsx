@@ -75,6 +75,11 @@ const navItems: NavItem[] = [
             name: "Reffers List",
             path: "/refers-list",
       },
+      {
+            icon: <TableIcon />,
+            name: "Contact List",
+            path: "/contact-list",
+      },
         {
             icon: <TableIcon />,
             name: "Reffer charge",

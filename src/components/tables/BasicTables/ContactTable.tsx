@@ -9,15 +9,15 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function UserTable() {
-  const [userData, setUserData] = useState([]);
+export default function ContactTable() {
+  const [contactData, setContactData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [limit] = useState(10);
 
-  const getUserList = async () => {
+  const getContactList = async () => {
     try {
       setLoading(true);
 
@@ -26,7 +26,7 @@ export default function UserTable() {
       const response = await axios.get(
         `${
           import.meta.env.VITE_APP_URL
-        }api/admin/userList?page=${page}&limit=${limit}`,
+        }api/admin/contact-list?page=${page}&limit=${limit}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ export default function UserTable() {
         }
       );
 
-      setUserData(response.data?.data);
+      setContactData(response.data?.data);
       setTotalPages(response.data.pagination.totalPages);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
@@ -44,7 +44,7 @@ export default function UserTable() {
   };
 
   useEffect(() => {
-    getUserList();
+    getContactList();
   }, [page]);
 
   if (loading) return <p>Loading loans...</p>;
@@ -70,24 +70,18 @@ export default function UserTable() {
               >
                 Email
               </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Referral Code
-              </TableCell>
 
               <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                role
+                subject
               </TableCell>
               <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                registerBy
+                message
               </TableCell>
 
               <TableCell
@@ -100,7 +94,7 @@ export default function UserTable() {
           </TableHeader>
 
           <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-            {userData.map((user) => (
+            {contactData.map((user) => (
               <TableRow key={user.id}>
                 <TableCell className="px-5 py-4 sm:px-6 text-start">
                   <div className="flex items-center gap-3">
@@ -115,13 +109,10 @@ export default function UserTable() {
                   {user.email}
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {user.referralCode ? user?.referralCode : "N/A"}
+                  {user.subject}
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {user.role}
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {user.registerBy}
+                  {user.message}
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {new Date(user.createdAt).toLocaleDateString()}
