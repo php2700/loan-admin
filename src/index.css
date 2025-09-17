@@ -5,7 +5,19 @@ layer(base);
 
 @custom-variant dark (&:is(.dark *));
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
+#root,
+.App {
+  overflow-x: hidden;
+  width: 100%;
+}
 
 @theme {
   --font-*: initial;

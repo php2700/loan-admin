@@ -168,6 +168,18 @@ export default function LoanTable() {
               >
                 created
               </TableCell>
+               <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                created
+              </TableCell>
+               <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                created
+              </TableCell>
             </TableRow>
           </TableHeader>
 
@@ -281,6 +293,12 @@ export default function LoanTable() {
                 </TableCell>
 
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {new Date(loan.createdAt).toLocaleDateString()}
+                </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {new Date(loan.createdAt).toLocaleDateString()}
+                </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {new Date(loan.createdAt).toLocaleDateString()}
                 </TableCell>
               </TableRow>
