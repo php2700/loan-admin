@@ -18,6 +18,7 @@ export default function LoanTable() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [limit] = useState(10);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const getLoanList = async () => {
     try {
@@ -48,6 +49,10 @@ export default function LoanTable() {
   useEffect(() => {
     getLoanList();
   }, [page]);
+
+  const handleViewImg = (img) => {
+    setSelectedImg(img);
+  };
 
   if (loading) return <p>Loading loans...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
@@ -246,8 +251,11 @@ export default function LoanTable() {
                   {loan.branchName ? loan.branchName : "N/A"}
                 </TableCell>
 
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400 cursor-pointer">
                   <img
+                    onClick={() => {
+                      handleViewImg(loan.paymentImg);
+                    }}
                     src={
                       loan.paymentImg
                         ? `${import.meta.env.VITE_APP_URL}${loan.paymentImg}`
@@ -335,6 +343,31 @@ export default function LoanTable() {
           Next
         </button>
       </div>
+      {selectedImg && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-10 flex justify-center items-center z-50"
+          onClick={() => setSelectedImg(null)} 
+        >
+          <div
+            className="relative bg-white p-4 rounded-lg shadow-lg"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+          >
+            <button
+              className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600"
+              onClick={() => setSelectedImg(null)}
+            >
+              ✕
+            </button>
+
+            <img
+              src={`${import.meta.env.VITE_APP_URL}${selectedImg}`}
+              alt="Preview"
+              className="object-contain"
+              style={{ width: "600px", height: "400px" }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
